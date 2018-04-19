@@ -8,9 +8,22 @@ def dar_boas_vindas
   puts 'Ja vamos começar um novo jogo para você, ' + nome
 end
 
-def sortear_numero_secreto
-  puts 'Tente advinhar nosso número secreto entre 0 e 200...'
-  rand(200)
+def sortear_numero_secreto(dificuldade)
+  maximo = 0
+  case dificuldade
+  when 1
+    maximo = 30
+  when 2
+    maximo = 60
+  when 3
+    maximo = 100
+  when 4
+    maximo = 150
+  else
+    maximo = 200
+  end
+  puts "Tente advinhar nosso número secreto entre 0 e #{maximo}..."
+  rand(maximo)
 end
 
 def obter_numero_escolhido_jogador
@@ -57,6 +70,11 @@ def calcular_pontos_conquistados(chute, numero_secreto, pontos_ate_agora)
   pontos_ate_agora -= pontos_a_perder
 end
 
+def definir_dificuldade
+  puts "Qual o nível de dificuldade que deseja? (1 fácil, 5 difícil)"
+  gets.to_i
+end
+
 def executar_jogo(qtd_max_tentativas, numero_secreto, max_pontos_jogador)
   chutes = []
   pontos_ate_agora = 0
@@ -71,7 +89,7 @@ def executar_jogo(qtd_max_tentativas, numero_secreto, max_pontos_jogador)
 end
 
 dar_boas_vindas
-numero_secreto = sortear_numero_secreto
+numero_secreto = sortear_numero_secreto(definir_dificuldade)
 pontos_conquistados = executar_jogo(QNT_MAXIMA_TENTATIVAS, numero_secreto, MAX_PONTOS_JOGADOR)
 puts "O número secreto é: #{numero_secreto}"
 puts "Você ganhou #{pontos_conquistados} pontos."
