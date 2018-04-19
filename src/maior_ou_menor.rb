@@ -26,17 +26,27 @@ def obter_numero_escolhido_jogador
   numero_escolhido.to_i
 end
 
-def verificar_se_jogador_acertou(numero_secreto, numero_escolhido_jogador)
-  if numero_secreto == numero_escolhido_jogador
+def numero_secreto_igual_numero_jogador(numero_secreto, numero_jogador)
+  igual = numero_secreto == numero_jogador
+  igual
+end
+
+def numero_secreto_maior_numero_jogador(numero_secreto, numero_do_jogador)
+  maior = numero_secreto > numero_do_jogador
+  maior
+end
+
+def verificar_se_jogador_acertou(numero_secreto, numero_do_jogador)
+  if numero_secreto_igual_numero_jogador(numero_secreto, numero_do_jogador)
     puts 'Paranbés! Parece que temos uma pessoa de sorte aqui, você venceu :)'
-    true
-  elsif numero_secreto > numero_escolhido_jogador
-    puts 'O número secreto é maior!'
-    false
-   else
-    puts 'O número secreto é menor!'
-    false
+    return true
   end
+  if numero_secreto_maior_numero_jogador(numero_secreto, numero_do_jogador)
+    puts 'O número secreto é maior!'
+  else
+    puts 'O número secreto é menor!'
+  end
+  false
 end
 
 def executar_jogo(qtd_max_tentativas, numero_secreto)
