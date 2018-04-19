@@ -53,9 +53,7 @@ def executar_jogo(qtd_max_tentativas, numero_secreto)
   for tentativa in 1..qtd_max_tentativas
     puts "Você possuiu #{qtd_max_tentativas} tentativas, essa é a de número: #{tentativa}"
     chute = obter_numero_escolhido_jogador
-    if verificar_se_jogador_acertou(numero_secreto, chute)
-      break
-    end
+    break if verificar_se_jogador_acertou(numero_secreto, chute)
   end
 end
 
