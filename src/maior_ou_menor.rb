@@ -49,10 +49,19 @@ def verificar_se_jogador_acertou(numero_secreto, numero_do_jogador)
   false
 end
 
+def informar_numeros_chutados(chute, chutes)
+  chutes << chute
+  puts "Chutes até agora: #{chutes}"
+end
+
 def executar_jogo(qtd_max_tentativas, numero_secreto)
+  chutes = []
+  total_de_chutes = 0
   for tentativa in 1..qtd_max_tentativas
     puts "Você possuiu #{qtd_max_tentativas} tentativas, essa é a de número: #{tentativa}"
     chute = obter_numero_escolhido_jogador
+    informar_numeros_chutados(chute, chutes)
+    total_de_chutes += 1
     break if verificar_se_jogador_acertou(numero_secreto, chute)
   end
 end
