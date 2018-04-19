@@ -24,11 +24,9 @@ for tentativa in 1..numero_tentativas_possiveis
   if numero_secreto == chute.to_i
     puts 'Paranbés! Parece que temos uma pessoa de sorte aqui, você venceu :)'
     break
-else 
-  if numero_secreto > chute.to_i
+  elsif numero_secreto > chute.to_i
         puts 'O número secreto é maior!'
-     else
+    else
         puts 'O número secreto é menor!'
-     end
-  end
+    end
 end
