@@ -1,4 +1,5 @@
 QNT_MAXIMA_TENTATIVAS = 5
+MAX_PONTOS_JOGADOR = 1000
 
 def dar_boas_vindas
   puts 'Bem vindo ao jogo de adivinhacao'
@@ -48,17 +49,29 @@ end
 def informar_numeros_chutados(chute, chutes)
   chutes << chute
   puts "Chutes ate agora: #{chutes}"
+  chutes
 end
 
-def executar_jogo(qtd_max_tentativas, numero_secreto)
+def calcular_pontos_conquistados(chute, numero_secreto, pontos_ate_agora)
+  pontos_a_perder = ((chute - numero_secreto).abs / 2)
+  pontos_ate_agora -= pontos_a_perder
+end
+
+def executar_jogo(qtd_max_tentativas, numero_secreto, max_pontos_jogador)
   chutes = []
+  pontos_ate_agora = 0
   Array.new(qtd_max_tentativas).each_index do |tentativa|
-    puts "Voce possuiu #{qtd_max_tentativas} tentativas, essa é a de numero: #{tentativa}"
+    puts "Voce possuiu #{qtd_max_tentativas} tentativas, essa é a de numero: #{tentativa + 1}"
     chute = obter_numero_escolhido_jogador
     informar_numeros_chutados(chute, chutes)
+    pontos_ate_agora = calcular_pontos_conquistados(chute, numero_secreto, max_pontos_jogador)
     break if verificar_se_jogador_acertou(numero_secreto, chute)
   end
+  pontos_ate_agora
 end
 
 dar_boas_vindas
-executar_jogo(QNT_MAXIMA_TENTATIVAS, sortear_numero_secreto)
+numero_secreto = sortear_numero_secreto
+pontos_conquistados = executar_jogo(QNT_MAXIMA_TENTATIVAS, numero_secreto, MAX_PONTOS_JOGADOR)
+puts "O número secreto é: #{numero_secreto}"
+puts "Você ganhou #{pontos_conquistados} pontos."
