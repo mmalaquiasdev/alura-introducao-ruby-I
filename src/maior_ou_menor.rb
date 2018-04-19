@@ -1,14 +1,17 @@
-puts 'Bem vindo ao jogo de adivinhação'
-puts 'Qual o seu nome caro jogador?'
-
-nome = gets
-
-puts 'Já vamos começar um novo jogo para você, ' + nome
-puts 'Tente advinhar nosso número secreto entre 0 e 200...'
-
 numero_secreto = 175
-
 numero_tentativas_possiveis = 5
+
+def dar_boas_vindas
+  puts 'Bem vindo ao jogo de adivinhação'
+  puts 'Qual o seu nome caro jogador?'
+
+  nome = gets
+
+  puts 'Já vamos começar um novo jogo para você, ' + nome
+  puts 'Tente advinhar nosso número secreto entre 0 e 200...'
+end
+
+dar_boas_vindas
 
 for tentativa in 1..numero_tentativas_possiveis
   puts "Você possuiu #{numero_tentativas_possiveis} tentativas, essa é a de número: #{tentativa}"
