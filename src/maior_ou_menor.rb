@@ -1,5 +1,10 @@
 QNT_MAXIMA_TENTATIVAS = 5
 MAX_PONTOS_JOGADOR = 1000
+NIVEL_MUITO_FACIL = 30
+NIVEL_FACIL = 60
+NIVEL_NORMAL = 100
+NIVEL_DIFICIL = 150
+NIVEL_IMPOSSIVEL = 200
 
 def imprimir_castelo_boas_vindas
   puts
@@ -43,19 +48,14 @@ def dar_boas_vindas
 end
 
 def obter_nivel_dificuldade(dificuldade)
-  maximo = 0
-  case dificuldade
-  when 1
-    maximo = 30
-  when 2
-    maximo = 60
-  when 3
-    maximo = 100
-  when 4
-    maximo = 150
-  else
-    maximo = 200
-  end
+  dificuldades = {
+    1 => NIVEL_MUITO_FACIL,
+    2 => NIVEL_FACIL,
+    3 => NIVEL_NORMAL,
+    4 => NIVEL_DIFICIL,
+    5 => NIVEL_IMPOSSIVEL
+  }
+  dificuldades[dificuldade]
 end
 
 def sortear_numero_secreto(dificuldade)
@@ -105,11 +105,11 @@ end
 
 def calcular_pontos_conquistados(chute, numero_secreto, pontos_ate_agora)
   pontos_a_perder = ((chute - numero_secreto).abs / 2)
-  pontos_ate_agora = pontos_ate_agora - pontos_a_perder
+  pontos_ate_agora -= pontos_a_perder
 end
 
 def definir_dificuldade
-  puts '(1) Muito fácil (2) Fácil (3) Normal (4) Difícil (5) Impossível'  
+  puts '(1) Muito fácil (2) Fácil (3) Normal (4) Difícil (5) Impossível'
   gets.to_i
 end
 
