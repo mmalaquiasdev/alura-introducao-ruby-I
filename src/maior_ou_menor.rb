@@ -1,14 +1,26 @@
 QNT_MAXIMA_TENTATIVAS = 5
 MAX_PONTOS_JOGADOR = 1000
 
+def imprimir_castelo_boas_vindas
+  puts
+  puts "        P  /_\  P                              "
+  puts "       /_\_|_|_/_\                             "
+  puts "   n_n | ||. .|| | n_n         Bem vindo ao    "
+  puts "   |_|_|nnnn nnnn|_|_|     Jogo de Adivinhação!"
+  puts "  |' '  |  |_|  |'  ' |                        "
+  puts "  |_____| ' _ ' |_____|                        " 
+  puts "        \__|_|__/                              "
+  puts
+end
+
 def dar_boas_vindas
-  puts 'Bem vindo ao jogo de adivinhação'
+  imprimir_castelo_boas_vindas
   puts 'Qual o seu nome caro jogador?'
   nome = gets
   puts 'Ja vamos começar um novo jogo para você, ' + nome
 end
 
-def sortear_numero_secreto(dificuldade)
+def obter_nivel_dificuldade(dificuldade)
   maximo = 0
   case dificuldade
   when 1
@@ -22,8 +34,12 @@ def sortear_numero_secreto(dificuldade)
   else
     maximo = 200
   end
-  puts "Tente advinhar nosso número secreto entre 0 e #{maximo}..."
-  rand(maximo)
+end
+
+def sortear_numero_secreto(dificuldade)
+  nivel = obter_nivel_dificuldade(dificuldade)
+  puts "Tente advinhar nosso número secreto entre 1 e #{nivel}..."
+  rand(nivel) + 1
 end
 
 def obter_numero_escolhido_jogador
@@ -67,7 +83,7 @@ end
 
 def calcular_pontos_conquistados(chute, numero_secreto, pontos_ate_agora)
   pontos_a_perder = ((chute - numero_secreto).abs / 2)
-  pontos_ate_agora -= pontos_a_perder
+  pontos_ate_agora = pontos_ate_agora - pontos_a_perder
 end
 
 def definir_dificuldade
@@ -88,8 +104,22 @@ def executar_jogo(qtd_max_tentativas, numero_secreto, max_pontos_jogador)
   pontos_ate_agora
 end
 
+def encerrar_jogo?
+  puts 'Desejar encerrar o jogo? (S/N)'
+  encerrar_jogo = gets.strip
+  encerrar_jogo.casecmp('S').zero?
+end
+
+def jogar
+  numero_secreto = sortear_numero_secreto(definir_dificuldade)
+  pontos_conquistados = executar_jogo(QNT_MAXIMA_TENTATIVAS, numero_secreto, MAX_PONTOS_JOGADOR)
+  puts "O número secreto é: #{numero_secreto}"
+  puts "Você ganhou #{pontos_conquistados} pontos."
+end
+
 dar_boas_vindas
-numero_secreto = sortear_numero_secreto(definir_dificuldade)
-pontos_conquistados = executar_jogo(QNT_MAXIMA_TENTATIVAS, numero_secreto, MAX_PONTOS_JOGADOR)
-puts "O número secreto é: #{numero_secreto}"
-puts "Você ganhou #{pontos_conquistados} pontos."
+
+loop do
+  jogar
+  break if encerrar_jogo?
+end
