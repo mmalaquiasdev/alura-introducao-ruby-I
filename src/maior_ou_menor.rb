@@ -13,6 +13,28 @@ def imprimir_castelo_boas_vindas
   puts
 end
 
+def imprimir_sorriso_da_vitoria
+  puts
+  puts "             OOOOOOOOOOO               "
+  puts "         OOOOOOOOOOOOOOOOOOO           "
+  puts "      OOOOOO  OOOOOOOOO  OOOOOO        "
+  puts "    OOOOOO      OOOOO      OOOOOO      "
+  puts "  OOOOOOOO  #   OOOOO  #   OOOOOOOO    "
+  puts " OOOOOOOOOO    OOOOOOO    OOOOOOOOOO   "
+  puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+  puts "OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO  "
+  puts "OOOO  OOOOOOOOOOOOOOOOOOOOOOOOO  OOOO  "
+  puts " OOOO  OOOOOOOOOOOOOOOOOOOOOOO  OOOO   "
+  puts "  OOOO   OOOOOOOOOOOOOOOOOOOO  OOOO    "
+  puts "    OOOOO   OOOOOOOOOOOOOOO   OOOO     "
+  puts "      OOOOOO   OOOOOOOOO   OOOOOO      "
+  puts "         OOOOOO         OOOOOO         "
+  puts "             OOOOOOOOOOOO              "
+  puts
+  puts "               Acertou!                "
+  puts
+end
+
 def dar_boas_vindas
   imprimir_castelo_boas_vindas
   puts 'Qual o seu nome caro jogador?'
@@ -62,7 +84,7 @@ end
 
 def verificar_se_jogador_acertou(numero_secreto, numero_do_jogador)
   if numero_secreto_igual_numero_jogador(numero_secreto, numero_do_jogador)
-    puts 'Parabéns! Parece que temos uma pessoa de sorte aqui, você venceu :)'
+    imprimir_sorriso_da_vitoria
     return true
   end
 
@@ -87,7 +109,7 @@ def calcular_pontos_conquistados(chute, numero_secreto, pontos_ate_agora)
 end
 
 def definir_dificuldade
-  puts "Qual o nível de dificuldade que deseja? (1 fácil, 5 difícil)"
+  puts '(1) Muito fácil (2) Fácil (3) Normal (4) Difícil (5) Impossível'  
   gets.to_i
 end
 
